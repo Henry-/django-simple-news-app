@@ -55,6 +55,9 @@ class CategoryManagerTestCase(TestCase):
         Entry.objects.create(category=c2, author=author, title='e1', text='e1',
                              slug='e3',
                              date=now() - timedelta(days=1), active=True)
+        Entry.objects.create(category=c2, author=author, title='e1', text='e1',
+                             slug='e33',
+                             date=now() - timedelta(days=1), active=True)
         Entry.objects.create(category=c3, author=author, title='e1', text='e1',
                              slug='e4',
                              date=now() - timedelta(days=2), active=True)

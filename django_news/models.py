@@ -34,7 +34,8 @@ class Author(models.Model):
 
 class CategoryManager(models.Manager):
     def get_active(self):
-        return self.filter(entries__active=True, entries__date__lte=now())
+        return self.filter(entries__active=True,
+                           entries__date__lte=now()).distinct()
 
 
 @python_2_unicode_compatible
