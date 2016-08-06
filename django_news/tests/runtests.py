@@ -1,9 +1,9 @@
 # coding=utf-8
 """A standalone test runner script, configuring the minimum settings
-required for django-yandex-cash-register tests to execute.
+required for django-simple-news-app tests to execute.
 Re-use at your own risk: many Django applications will require full
 settings and/or templates in order to execute their tests, while
-django-yandex-cash-register does not.
+django-simple-news-app does not.
 """
 from __future__ import absolute_import, unicode_literals
 
@@ -16,7 +16,7 @@ APP_DIR = os.path.abspath(
     os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 sys.path.insert(0, APP_DIR)
 
-# Minimum settings required for django-simple-contact-form to work.
+# Minimum settings required for django-simple-news-app to work.
 SETTINGS_DICT = {
     'BASE_DIR': APP_DIR,
     'INSTALLED_APPS': (
