@@ -40,15 +40,22 @@ class CategoryManager(models.Manager):
 
 @python_2_unicode_compatible
 class Category(models.Model):
+    WEIGHT_CHOICES = tuple((i, i) for i in range(-10, 10))
+
     name = models.CharField(_('Name'), max_length=200)
     slug = models.SlugField(_('Slug'), unique=True)
     description = models.TextField(_('Description'), blank=True)
+    weight = models.IntegerField(
+        _('Weight'), choices=WEIGHT_CHOICES, default=0,
+        help_text=_('Weight controls order of categories in menus')
+    )
 
     objects = CategoryManager()
 
     class Meta:
         verbose_name = _('Category')
         verbose_name_plural = _('Categories')
+        ordering = ('-weight', 'id')
 
     def __str__(self):
         return self.name

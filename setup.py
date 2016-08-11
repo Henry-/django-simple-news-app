@@ -5,7 +5,7 @@ from setuptools import setup
 
 setup(
     name='django-simple-news-app',
-    version='0.1.1',
+    version='0.1.2',
     zip_safe=False,
     description='Generic news application for Django',
     long_description=open(os.path.join(os.path.dirname(__file__),
@@ -19,6 +19,11 @@ setup(
         'django_news.migrations',
         'django_news.templatetags',
     ],
+    package_data={
+        'django_news': [
+            'locale/*/LC_MESSAGES/*.po',
+        ]
+    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
