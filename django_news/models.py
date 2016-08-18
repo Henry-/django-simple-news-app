@@ -5,7 +5,9 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models import Max
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.functional import cached_property
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
@@ -62,6 +64,12 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse('django_news:entry_list', kwargs={'slug': self.slug})
+
+    @cached_property
+    def updated(self):
+        return self.entries.get_active().aggregate(Max('updated')).get(
+            'updated__max', now()
+        )
 
 
 class EntryManager(models.Manager):
