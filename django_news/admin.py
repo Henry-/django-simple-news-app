@@ -34,16 +34,26 @@ class EntryAdmin(admin.ModelAdmin):
     }
 
     def has_add_permission(self, request):
-        return super(EntryAdmin, self).has_add_permission(request) and \
+        return (
+            super(EntryAdmin, self).has_add_permission(request) and
             Author.is_author(request.user)
+        )
 
     def has_change_permission(self, request, obj=None):
-        return super(EntryAdmin, self).has_change_permission(
-            request, obj) and Author.is_author(request.user)
+        return (
+            request.user.is_superuser or (
+                super(EntryAdmin, self).has_change_permission(request) and
+                Author.is_author(request.user)
+            )
+        )
 
     def has_delete_permission(self, request, obj=None):
-        return super(EntryAdmin, self).has_delete_permission(
-            request, obj) and Author.is_author(request.user)
+        return (
+            request.user.is_superuser or (
+                super(EntryAdmin, self).has_delete_permission(request) and
+                Author.is_author(request.user)
+            )
+        )
 
     @transaction.atomic
     def save_model(self, request, obj, form, change):
